@@ -1,0 +1,5 @@
+<% if current_user.id == @goal.user_id %>
+  <% button_path = @goal.completed ? reactivate_goal_url : complete_goal_url %>
+  <% button_text = @goal.completed ? "Re-activate this goal" : "Mark as completed" %>
+  <%= button_to button_text, button_path, method: :post %>
+<% end %>

@@ -1,0 +1,6 @@
+<%= link_to "Create New Goal", new_user_goal_url(current_user) %>
+<ul>
+  <% @goals.each do |goal| %>
+    <li><%= link_to goal.title, goal_url(goal) %> <%= "-- Completed!" if goal.completed%></li>
+  <% end %>
+</ul>

@@ -1,0 +1,12 @@
+<h1> <%= @goal.title %> </h1>
+<p><%= @goal.body %></p>
+<p><%= @goal.is_private ? "This goal is private" : "This goal is public" %></p>
+<%= render 'goals/completion_button'%>
+
+<p style="color: green; font-weight: bold;"><%= "Congratulations! You've completed this goal"  if @goal.completed %></p>
+
+<% if current_user.id == @goal.user_id %>
+<%= link_to "Edit this goal", edit_goal_url(@goal) %>
+<%= button_to "Delete this goal", goal_url(@goal), method: :delete %>
+<% end %>
+<%= link_to "Back to Goals", user_goals_url(@goal.user) %>
