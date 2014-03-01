@@ -16,7 +16,7 @@ FactoryGirl.define do
     password "meowmeow"
 
     factory :user_with_goal do
-      username "Breakfast"
+      username "Kiki"
       password "meowmeow"
 
       after(:create) do |user|

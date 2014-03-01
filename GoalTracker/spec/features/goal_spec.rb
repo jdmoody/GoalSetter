@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'debugger'
 
 feature "user makes goals" do
   subject { page }
