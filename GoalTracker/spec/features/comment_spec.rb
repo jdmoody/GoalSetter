@@ -6,7 +6,7 @@ feature 'user can add comment to another user' do
   let(:user2) { FactoryGirl.create(:user_with_goal) }
 
   before(:each) do
-    log_in(user1)
+    login_user(user1)
     visit user_url(user2)
   end
 
@@ -27,7 +27,7 @@ feature 'user can add comment to another users public goal' do
   let(:user2) { FactoryGirl.create(:user_with_goal) }
 
   before(:each) do
-    log_in(user1)
+    login_user(user1)
     visit goal_url(user2.goals.first)
   end
 

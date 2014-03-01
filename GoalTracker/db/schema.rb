@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228211622) do
+ActiveRecord::Schema.define(version: 20140301010125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.text     "body"
+    t.integer  "author_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+
+  create_table "goal_comments", force: true do |t|
+    t.integer  "goal_id"
+    t.string   "body"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "goal_comments", ["goal_id"], name: "index_goal_comments_on_goal_id", using: :btree
 
   create_table "goals", force: true do |t|
     t.integer  "user_id"
@@ -27,6 +48,16 @@ ActiveRecord::Schema.define(version: 20140228211622) do
   end
 
   add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
+
+  create_table "user_comments", force: true do |t|
+    t.integer  "user_id"
+    t.string   "body"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_comments", ["user_id"], name: "index_user_comments_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

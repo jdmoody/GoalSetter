@@ -13,9 +13,12 @@
 #
 
 class Goal < ActiveRecord::Base
+  include Commentable
   validates :title, :user_id, presence: true
 
   belongs_to :user
+  # has_many :comments, as: :commentable
+
   after_initialize :init
 
   private

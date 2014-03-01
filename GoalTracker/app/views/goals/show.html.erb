@@ -10,3 +10,27 @@
 <%= button_to "Delete this goal", goal_url(@goal), method: :delete %>
 <% end %>
 <%= link_to "Back to Goals", user_goals_url(@goal.user) %>
+
+<h3> Comments </h3>
+
+<% if @goal.comments %>
+  <% @goal.comments.each do |comment| %>
+  <p><%= comment.body %>
+    <br>
+    Posted by: <%= comment.author.username %>
+  </p>
+  <% end %>
+<% else %>
+<p> No comments yet </p>
+<% end %>
+
+
+<form action="<%= goal_new_comment_url(@goal) %>" method="post" accept-charset="utf-8">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label>
+    Comment:
+    <textarea name="comment[body]" ></textarea>
+  </label>
+  <p><input type="submit" value="Add Comment"></p>
+</form>

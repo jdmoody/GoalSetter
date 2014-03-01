@@ -1,3 +1,28 @@
 <h1><%= @user.username %></h1>
 
 <%= link_to "My Goals", user_goals_url(@user) %>
+
+
+<h3> Comments </h3>
+
+<% if @user.comments %>
+  <% @user.comments.each do |comment| %>
+  <p><%= comment.body %>
+    <br>
+    Posted by: <%= comment.author.username %>
+  </p>
+  <% end %>
+<% else %>
+<p> No comments yet </p>
+<% end %>
+
+
+<form action="<%= user_new_comment_url(@user) %>" method="post" accept-charset="utf-8">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label>
+    Comment:
+    <textarea name="comment[body]" ></textarea>
+  </label>
+  <p><input type="submit" value="Add Comment"></p>
+</form>

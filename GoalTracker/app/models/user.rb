@@ -11,6 +11,7 @@
 #
 
 class User < ActiveRecord::Base
+  include Commentable
   before_validation :ensure_session_token
 
   validates :username, :password_digest, :session_token, presence: true
@@ -19,6 +20,8 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :goals
+  # has_many :comments, as: :commentable
+  has_many :authored_comments, class_name: "Comment", foreign_key: :author_id
 
   def self.generate_session_token
     SecureRandom::urlsafe_base64
